@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: mahat-bank-backend
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mahatbank
+    username: mahatuser
+    password: MahatBank2024!
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+app:
+  jwt:
+    secret: MahatBankSuperSecretKey2024!ForJWTTokenSigning
+    expiration: 86400000
+
+logging:
+  level:
+    com.mahatbank: DEBUG
+    org.springframework.security: DEBUG
