@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import {
-  AppBar, Toolbar, Typography, Container, Grid, Paper,
-  Box, Button, Table, TableBody, TableCell, TableContainer,
-  TableHead, TableRow, Dialog, DialogTitle, DialogContent,
-  DialogActions, TextField, MenuItem, Alert, Card, CardContent
+  AppBar, Toolbar, Typography, Container, Grid,
+  Box, Button, Dialog, DialogTitle, DialogContent,
+  DialogActions, TextField, MenuItem, Alert, Card, CardContent,
+  CircularProgress
 } from '@mui/material';
 import { AccountBalance, Add } from '@mui/icons-material';
 import axios from 'axios';
@@ -26,6 +26,7 @@ const Accounts: React.FC = () => {
   const [newAccount, setNewAccount] = useState({ accountType: 'SAVINGS', initialDeposit: 0 });
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const token = localStorage.getItem('token');
 
@@ -34,6 +35,7 @@ const Accounts: React.FC = () => {
   }, []);
 
   const fetchAccounts = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(`${API_URL}/accounts`, {
         headers: { Authorization: `Bearer ${token}` }
@@ -41,6 +43,8 @@ const Accounts: React.FC = () => {
       setAccounts(response.data);
     } catch (err: any) {
       setError('Failed to fetch accounts');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -52,12 +56,21 @@ const Accounts: React.FC = () => {
       setMessage('Account created successfully!');
       setOpenDialog(false);
       fetchAccounts();
+      setNewAccount({ accountType: 'SAVINGS', initialDeposit: 0 });
     } catch (err: any) {
       setError(err.response?.data?.error || 'Failed to create account');
     }
   };
 
   const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+  if (loading) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
     <>
@@ -76,10 +89,10 @@ const Accounts: React.FC = () => {
       </AppBar>
 
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-        {message && <Alert severity="success" sx={{ mb: 2 }}>{message}</Alert>}
-        {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
+        {message && <Alert severity="success" sx={{ mb: 2 }} onClose={() => setMessage('')}>{message}</Alert>}
+        {error && <Alert severity="error" sx={{ mb: 2 }} onClose={() => setError('')}>{error}</Alert>}
 
-        <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
           <Typography variant="h4">My Accounts</Typography>
           <Button variant="contained" startIcon={<Add />} onClick={() => setOpenDialog(true)}>
             Open New Account
@@ -87,35 +100,51 @@ const Accounts: React.FC = () => {
         </Box>
 
         <Grid container spacing={3}>
-          {accounts.map((account) => (
-            <Grid item xs={12} md={4} key={account.id}>
-              <Card>
-                <CardContent>
-                  <Box display="flex" alignItems="center">
-                    <AccountBalance color="secondary" sx={{ fontSize: 40, mr: 2 }} />
-                    <Box>
-                      <Typography color="textSecondary" variant="body2">
-                        {account.accountType}
-                      </Typography>
-                      <Typography variant="h6">{account.accountNumber}</Typography>
-                      <Typography variant="h5" color="primary">
-                        Rs. {account.balance.toLocaleString()}
-                      </Typography>
-                      <Typography variant="caption" color="textSecondary">
-                        Status: {account.status} • Currency: {account.currency}
-                      </Typography>
-                    </Box>
-                  </Box>
-                </CardContent>
+          {accounts.length === 0 ? (
+            <Grid size={{ xs: 12 }}>
+              <Card sx={{ p: 4, textAlign: 'center' }}>
+                <Typography variant="h6" color="textSecondary">
+                  No accounts found. Open your first account!
+                </Typography>
               </Card>
             </Grid>
-          ))}
+          ) : (
+            accounts.map((account) => (
+              <Grid size={{ xs: 12, md: 4 }} key={account.id}>
+                <Card>
+                  <CardContent>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                      <AccountBalance color="secondary" sx={{ fontSize: 40, mr: 2 }} />
+                      <Box>
+                        <Typography color="textSecondary" variant="body2">
+                          {account.accountType}
+                        </Typography>
+                        <Typography variant="h6">{account.accountNumber}</Typography>
+                        <Typography variant="h5" color="primary">
+                          Rs. {account.balance.toLocaleString()}
+                        </Typography>
+                        <Typography variant="caption" color="textSecondary">
+                          Status: {account.status} • Currency: {account.currency}
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))
+          )}
         </Grid>
 
         {/* Create Account Dialog */}
-        <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+        <Dialog 
+          open={openDialog} 
+          onClose={() => setOpenDialog(false)}
+          scroll="paper"
+          maxWidth="sm"
+          fullWidth
+        >
           <DialogTitle>Open New Account</DialogTitle>
-          <DialogContent>
+          <DialogContent dividers>
             <TextField
               fullWidth
               select

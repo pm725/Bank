@@ -20,11 +20,15 @@ com\mahatbank\dto\request\LoginRequest.class
 com\mahatbank\model\Transaction.class
 com\mahatbank\model\User.class
 com\mahatbank\repository\LoanRepository.class
+com\mahatbank\dto\response\AccountResponse.class
+com\mahatbank\service\AccountService.class
 com\mahatbank\dto\response\JwtResponse.class
 com\mahatbank\repository\UserRepository.class
+com\mahatbank\controller\AccountController.class
 com\mahatbank\model\Account$AccountStatus.class
 com\mahatbank\model\Loan.class
 com\mahatbank\controller\PublicController.class
+com\mahatbank\dto\request\CreateAccountRequest.class
 com\mahatbank\dto\request\RegisterRequest.class
 com\mahatbank\model\User$KycStatus.class
 com\mahatbank\model\Loan$LoanStatus.class

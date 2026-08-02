@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/accounts")
+@RequestMapping("/accounts")  // ← FIXED: removed /api
 public class AccountController {
 
     private final AccountService accountService;
