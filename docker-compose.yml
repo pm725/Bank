@@ -6,8 +6,8 @@ services:
     container_name: mahat-postgres
     environment:
       POSTGRES_DB: mahatbank
-      POSTGRES_USER: mahatuser
-      POSTGRES_PASSWORD: MahatBank2024!
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     ports:
       - "5432:5432"
     volumes:
