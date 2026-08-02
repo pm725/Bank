@@ -8,21 +8,9 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Accounts from './pages/Accounts';
 import Transfer from './pages/Transfer';
-
-// Placeholder components
-const History: React.FC = () => (
-  <div style={{ padding: '40px', textAlign: 'center' }}>
-    <h2>Transaction History</h2>
-    <p>Coming soon...</p>
-  </div>
-);
-
-const Profile: React.FC = () => (
-  <div style={{ padding: '40px', textAlign: 'center' }}>
-    <h2>My Profile</h2>
-    <p>Coming soon...</p>
-  </div>
-);
+import Loans from './pages/Loans';
+import History from './pages/History';
+import Profile from './pages/Profile';
 
 const App: React.FC = () => {
   const isAuthenticated = !!localStorage.getItem('token');
@@ -37,6 +25,7 @@ const App: React.FC = () => {
           <Route path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/" />} />
           <Route path="/accounts" element={isAuthenticated ? <Accounts /> : <Navigate to="/" />} />
           <Route path="/transfer" element={isAuthenticated ? <Transfer /> : <Navigate to="/" />} />
+          <Route path="/loans" element={isAuthenticated ? <Loans /> : <Navigate to="/" />} />
           <Route path="/history" element={isAuthenticated ? <History /> : <Navigate to="/" />} />
           <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/" />} />
         </Routes>

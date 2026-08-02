@@ -4,7 +4,7 @@ import {
   AppBar, Toolbar, Typography, Container, Grid, Paper,
   Box, Button, Card, CardContent
 } from '@mui/material';
-import { AccountBalance, Payment, Receipt, Person, Add } from '@mui/icons-material';
+import { AccountBalance, Payment, Receipt, Person, Add, AccountBalanceWallet } from '@mui/icons-material';
 import axios from 'axios';
 
 const API_URL = 'http://localhost:9090/api';
@@ -132,6 +132,20 @@ const Dashboard: React.FC = () => {
                   <Box>
                     <Person sx={{ fontSize: 30 }} />
                     <Typography>Profile</Typography>
+                  </Box>
+                </Button>
+              </Grid>
+              {/* LOANS BUTTON - NEW */}
+              <Grid size={{ xs: 6, md: 3 }}>
+                <Button 
+                  variant="contained" 
+                  fullWidth 
+                  sx={{ height: 80, bgcolor: '#9c27b0' }}
+                  onClick={() => navigate('/loans')}
+                >
+                  <Box>
+                    <AccountBalanceWallet sx={{ fontSize: 30 }} />
+                    <Typography>Loans</Typography>
                   </Box>
                 </Button>
               </Grid>

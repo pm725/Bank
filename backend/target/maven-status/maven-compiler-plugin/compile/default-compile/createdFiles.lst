@@ -5,13 +5,16 @@ com\mahatbank\controller\TestController.class
 com\mahatbank\model\Transaction$TransactionStatus.class
 com\mahatbank\model\Transaction$TransactionType.class
 com\mahatbank\dto\response\TransactionResponse.class
+com\mahatbank\dto\request\EMICalculationRequest.class
 com\mahatbank\controller\TransactionController.class
 com\mahatbank\repository\AccountRepository.class
 com\mahatbank\MahatBankBackendApplication.class
 com\mahatbank\config\JwtUtils.class
 com\mahatbank\config\JwtAuthenticationFilter.class
 com\mahatbank\controller\HealthController.class
+com\mahatbank\dto\response\LoanResponse.class
 com\mahatbank\controller\TestNewController.class
+com\mahatbank\dto\request\LoanApplicationRequest.class
 com\mahatbank\model\Account$AccountType.class
 com\mahatbank\controller\AuthController.class
 com\mahatbank\model\User$Role.class
@@ -33,6 +36,8 @@ com\mahatbank\model\Account$AccountStatus.class
 com\mahatbank\model\Loan.class
 com\mahatbank\controller\PublicController.class
 com\mahatbank\dto\request\CreateAccountRequest.class
+com\mahatbank\controller\LoanController.class
+com\mahatbank\service\LoanService.class
 com\mahatbank\dto\request\RegisterRequest.class
 com\mahatbank\model\User$KycStatus.class
 com\mahatbank\model\Loan$LoanStatus.class
