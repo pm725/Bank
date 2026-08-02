@@ -18,8 +18,6 @@ import java.util.Arrays;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    // No AuthenticationManager or JWT filter needed - we do manual auth
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -31,9 +29,8 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .anyRequest().permitAll()  // Allow everything - we handle auth manually
+                .anyRequest().permitAll()  // ← ALLOW EVERYTHING
             );
-
         return http.build();
     }
 
@@ -43,7 +40,9 @@ public class SecurityConfig {
         configuration.setAllowedOrigins(Arrays.asList(
             "http://localhost:3000",
             "http://localhost:3001",
-            "http://localhost:5173"
+            "http://localhost:5173",
+            "http://localhost:8081",
+            "http://localhost:19006"
         ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));

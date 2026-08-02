@@ -2,7 +2,7 @@ package com.mahatbank.model;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "scheduled_transactions")
@@ -24,17 +24,22 @@ public class ScheduledTransaction {
     private String description;
 
     @Enumerated(EnumType.STRING)
-    private ScheduleFrequency frequency; // DAILY, WEEKLY, MONTHLY, ONCE
+    private ScheduleFrequency frequency;
 
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
-    private LocalDateTime lastExecuted;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private LocalDate lastExecuted;
 
     @Enumerated(EnumType.STRING)
-    private ScheduleStatus status; // ACTIVE, PAUSED, COMPLETED, CANCELLED
+    private ScheduleStatus status;
 
-    public enum ScheduleFrequency { DAILY, WEEKLY, MONTHLY, ONCE }
-    public enum ScheduleStatus { ACTIVE, PAUSED, COMPLETED, CANCELLED }
+    public enum ScheduleFrequency {
+        DAILY, WEEKLY, MONTHLY, ONCE
+    }
+
+    public enum ScheduleStatus {
+        ACTIVE, PAUSED, COMPLETED, CANCELLED
+    }
 
     // Getters and Setters
     public Long getId() { return id; }
@@ -55,14 +60,14 @@ public class ScheduledTransaction {
     public ScheduleFrequency getFrequency() { return frequency; }
     public void setFrequency(ScheduleFrequency frequency) { this.frequency = frequency; }
 
-    public LocalDateTime getStartDate() { return startDate; }
-    public void setStartDate(LocalDateTime startDate) { this.startDate = startDate; }
+    public LocalDate getStartDate() { return startDate; }
+    public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
 
-    public LocalDateTime getEndDate() { return endDate; }
-    public void setEndDate(LocalDateTime endDate) { this.endDate = endDate; }
+    public LocalDate getEndDate() { return endDate; }
+    public void setEndDate(LocalDate endDate) { this.endDate = endDate; }
 
-    public LocalDateTime getLastExecuted() { return lastExecuted; }
-    public void setLastExecuted(LocalDateTime lastExecuted) { this.lastExecuted = lastExecuted; }
+    public LocalDate getLastExecuted() { return lastExecuted; }
+    public void setLastExecuted(LocalDate lastExecuted) { this.lastExecuted = lastExecuted; }
 
     public ScheduleStatus getStatus() { return status; }
     public void setStatus(ScheduleStatus status) { this.status = status; }

@@ -11,6 +11,8 @@ import Transfer from './pages/Transfer';
 import Loans from './pages/Loans';
 import History from './pages/History';
 import Profile from './pages/Profile';
+import AdminDashboard from './pages/AdminDashboard';
+import ScheduledPayments from './pages/ScheduledPayments';  
 
 const App: React.FC = () => {
   const isAuthenticated = !!localStorage.getItem('token');
@@ -28,6 +30,8 @@ const App: React.FC = () => {
           <Route path="/loans" element={isAuthenticated ? <Loans /> : <Navigate to="/" />} />
           <Route path="/history" element={isAuthenticated ? <History /> : <Navigate to="/" />} />
           <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/" />} />
+          <Route path="/admin" element={isAuthenticated ? <AdminDashboard /> : <Navigate to="/" />} />
+          <Route path="/scheduled" element={isAuthenticated ? <ScheduledPayments /> : <Navigate to="/" />} />  {/* ✅ ADD THIS */}
         </Routes>
       </Router>
     </ThemeProvider>

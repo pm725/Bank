@@ -23,11 +23,8 @@ public class ReportController {
     @GetMapping("/transactions/csv")
     public ResponseEntity<String> downloadTransactionsCSV(Authentication authentication) {
         String userEmail = ((UserDetails) authentication.getPrincipal()).getUsername();
-        // Get user ID from email - you'd need to fetch from repository
-        // For simplicity, we'll pass a dummy ID; implement properly in your code
+        String csv = reportService.generateCSVReport(1L);
         
-        String csv = reportService.generateCSVReport(1L); // Replace with actual user ID
-
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=transactions.csv");
 

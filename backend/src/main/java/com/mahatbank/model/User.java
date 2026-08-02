@@ -1,5 +1,6 @@
 package com.mahatbank.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -51,9 +52,11 @@ public class User {
     private LocalDateTime updatedAt;
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore  // ← ADDED: Prevents infinite recursion
     private List<Account> accounts = new ArrayList<>();
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore  // ← ADDED: Prevents infinite recursion
     private List<Loan> loans = new ArrayList<>();
     
     public enum KycStatus {
