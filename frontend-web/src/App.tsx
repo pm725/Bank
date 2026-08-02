@@ -7,11 +7,22 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Accounts from './pages/Accounts';
+import Transfer from './pages/Transfer';
 
-// Temporary placeholder components (we'll build these later)
-const Transfer: React.FC = () => <div>Transfer Page (Coming Soon)</div>;
-const History: React.FC = () => <div>Transaction History (Coming Soon)</div>;
-const Profile: React.FC = () => <div>Profile Page (Coming Soon)</div>;
+// Placeholder components
+const History: React.FC = () => (
+  <div style={{ padding: '40px', textAlign: 'center' }}>
+    <h2>Transaction History</h2>
+    <p>Coming soon...</p>
+  </div>
+);
+
+const Profile: React.FC = () => (
+  <div style={{ padding: '40px', textAlign: 'center' }}>
+    <h2>My Profile</h2>
+    <p>Coming soon...</p>
+  </div>
+);
 
 const App: React.FC = () => {
   const isAuthenticated = !!localStorage.getItem('token');

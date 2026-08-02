@@ -3,7 +3,7 @@ import {
   AppBar, Toolbar, Typography, Container, Grid,
   Box, Button, Dialog, DialogTitle, DialogContent,
   DialogActions, TextField, MenuItem, Alert, Card, CardContent,
-  CircularProgress
+  CircularProgress, Divider
 } from '@mui/material';
 import { AccountBalance, Add } from '@mui/icons-material';
 import axios from 'axios';
@@ -40,6 +40,7 @@ const Accounts: React.FC = () => {
       const response = await axios.get(`${API_URL}/accounts`, {
         headers: { Authorization: `Bearer ${token}` }
       });
+      console.log('Accounts data:', response.data);
       setAccounts(response.data);
     } catch (err: any) {
       setError('Failed to fetch accounts');
@@ -71,6 +72,16 @@ const Accounts: React.FC = () => {
       </Box>
     );
   }
+
+  // Get color for account type
+  const getAccountColor = (type: string) => {
+    switch(type) {
+      case 'SAVINGS': return '#1976d2';
+      case 'CHECKING': return '#2e7d32';
+      case 'FIXED_DEPOSIT': return '#ed6c02';
+      default: return '#1976d2';
+    }
+  };
 
   return (
     <>
@@ -110,21 +121,63 @@ const Accounts: React.FC = () => {
             </Grid>
           ) : (
             accounts.map((account) => (
-              <Grid size={{ xs: 12, md: 4 }} key={account.id}>
-                <Card>
+              <Grid size={{ xs: 12, sm: 6, md: 4 }} key={account.id}>
+                <Card 
+                  sx={{ 
+                    height: '100%',
+                    borderTop: `4px solid ${getAccountColor(account.accountType)}`,
+                    transition: 'transform 0.2s ease-in-out',
+                    '&:hover': {
+                      transform: 'scale(1.02)',
+                      boxShadow: 6
+                    }
+                  }}
+                >
                   <CardContent>
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                      <AccountBalance color="secondary" sx={{ fontSize: 40, mr: 2 }} />
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                      {/* Account Type Badge */}
                       <Box>
-                        <Typography color="textSecondary" variant="body2">
+                        <Typography 
+                          variant="caption" 
+                          sx={{ 
+                            backgroundColor: getAccountColor(account.accountType),
+                            color: 'white',
+                            padding: '2px 10px',
+                            borderRadius: '12px',
+                            display: 'inline-block',
+                            fontWeight: 'bold'
+                          }}
+                        >
                           {account.accountType}
                         </Typography>
-                        <Typography variant="h6">{account.accountNumber}</Typography>
-                        <Typography variant="h5" color="primary">
-                          Rs. {account.balance.toLocaleString()}
+                      </Box>
+
+                      {/* Account Number */}
+                      <Typography variant="h6" sx={{ fontWeight: 'bold', mt: 1 }}>
+                        {account.accountNumber}
+                      </Typography>
+
+                      {/* Balance - PROMINENT DISPLAY */}
+                      <Typography 
+                        variant="h4" 
+                        sx={{ 
+                          fontWeight: 'bold',
+                          color: '#1976d2',
+                          py: 1
+                        }}
+                      >
+                        Rs. {account.balance?.toLocaleString('en-IN') || '0'}
+                      </Typography>
+
+                      <Divider />
+
+                      {/* Account Details */}
+                      <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
+                        <Typography variant="caption" color="textSecondary">
+                          Status: {account.status}
                         </Typography>
                         <Typography variant="caption" color="textSecondary">
-                          Status: {account.status} • Currency: {account.currency}
+                          {account.currency}
                         </Typography>
                       </Box>
                     </Box>
