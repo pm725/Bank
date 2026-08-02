@@ -1,4 +1,4 @@
-Mahat Commercial Bank – Full-Stack Banking Platform
+#  Mahat Commercial Bank – Full-Stack Banking Platform
 
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.3-brightgreen.svg)](https://spring.io/projects/spring-boot)
 [![React](https://img.shields.io/badge/React-18-blue.svg)](https://reactjs.org/)
@@ -17,12 +17,13 @@ Mahat Commercial Bank – Full-Stack Banking Platform
 - [Project Structure](#-project-structure)
 - [Getting Started](#-getting-started)
 - [API Endpoints](#-api-endpoints)
-- [Mobile App](#-mobile-app)
+- [Mobile App Screens](#-mobile-app-screens)
 - [Testing](#-testing)
-- [Security](#-security-features)
+- [Security Features](#-security-features)
 - [Roadmap](#-roadmap)
 - [Contributing](#-contributing)
-- [License](#-license)
+- [Authors](#-authors)
+- [Acknowledgments](#-acknowledgments)
 
 ---
 
@@ -127,11 +128,11 @@ mahat-bank/
 │ │ └── components/ # Reusable mobile components
 │ └── package.json
 │
-├── docker/
-│ └── docker-compose.yml
+├── docker-compose.yml
 ├── LICENSE
 └── README.md
 
+text
 
 ---
 
@@ -154,31 +155,6 @@ mahat-bank/
 ```bash
 git clone https://github.com/pm725/mahat-bank.git
 cd mahat-bank
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 2️⃣ Backend Setup
 Configure Database
 Option A: Using MySQL
@@ -332,15 +308,6 @@ Write tests for new features
 
 Update documentation accordingly
 
-
-
-
-
-
-
-
-
-
 👥 Authors
 Name	Role	GitHub
 Priyanshu Mahat	Full-Stack Developer	@pm725
@@ -351,4 +318,4 @@ React & Material-UI Communities – For the excellent frontend tools
 
 React Native Team – For cross-platform mobile development
 
-All Open-Source Contributors – Whose libraries made this project possible
+All Open-Source Contributors – Whose libraries made this project possibl
